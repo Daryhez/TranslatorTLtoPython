@@ -30,6 +30,7 @@ simple_stat
  | leer
  | importar
  | atom NEWLINE
+ | expr
  | OTHER
  ;
 
@@ -88,7 +89,7 @@ accessarray
  : variable OKEY expr CKEY
  ;
 
-accessobject
+accesstoobject
  : variable POINT variableaccessarray
  ;
 
@@ -127,6 +128,7 @@ atom
  | array		#arrayAtom
  | objeto		#objetoAtom
  | accessarray  #accessToarray
+ | accesstoobject #accessObject
  | variable		#accessVariable
  | NIL          #nilAtom
  ;
