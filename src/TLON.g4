@@ -29,7 +29,6 @@ simple_stat
  | log
  | leer
  | importar
- | retornar
  | atom NEWLINE
  | OTHER
  ;
@@ -87,6 +86,15 @@ array
 
 accessarray
  : variable OKEY expr CKEY
+ ;
+
+accessobject
+ : variable POINT variableaccessarray
+ ;
+
+ variableaccessarray
+ : variable
+ | accessarray
  ;
 
 variable
