@@ -114,34 +114,31 @@ public class Listener implements TLONListener{
     public void enterFuncion(TLONParser.FuncionContext ctx) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; ctx.parametro(i) != null; i++){
-            sb.append(ctx.parametro(i));
+            sb.append(ctx.parametro(i).getText());
             sb.append(", ");
         }
+        String s = sb.substring(0, sb.length() - 2);
         for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println("def " + ctx.ID().getText() + " " + ctx.OPAR().getText() + " " + sb.toString() + " " + ctx.CPAR() + ":");
+        System.out.println("def " + ctx.ID().getText() + " " + ctx.OPAR().getText() + " " + s + " " + ctx.CPAR() + ":");
         tabs++;
     }
-
     @Override
     public void exitFuncion(TLONParser.FuncionContext ctx) {
-
+        tabs--;
     }
-
     @Override
     public void enterImportar(TLONParser.ImportarContext ctx) {
-
+        System.out.println("import " + ctx.ID(0).getText());
     }
-
     @Override
     public void exitImportar(TLONParser.ImportarContext ctx) {
 
     }
-
     @Override
     public void enterRetornar(TLONParser.RetornarContext ctx) {
-
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
+        System.out.println("return " +  ctx.expr().getText());
     }
-
     @Override
     public void exitRetornar(TLONParser.RetornarContext ctx) {
 
