@@ -87,6 +87,36 @@ public interface TLONListener extends ParseTreeListener {
 	 */
 	void exitIf_stat(TLONParser.If_statContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TLONParser#if_condition_block}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_condition_block(TLONParser.If_condition_blockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLONParser#if_condition_block}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_condition_block(TLONParser.If_condition_blockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link TLONParser#else_sy}.
+	 * @param ctx the parse tree
+	 */
+	void enterElse_sy(TLONParser.Else_syContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLONParser#else_sy}.
+	 * @param ctx the parse tree
+	 */
+	void exitElse_sy(TLONParser.Else_syContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link TLONParser#else_if_sy}.
+	 * @param ctx the parse tree
+	 */
+	void enterElse_if_sy(TLONParser.Else_if_syContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLONParser#else_if_sy}.
+	 * @param ctx the parse tree
+	 */
+	void exitElse_if_sy(TLONParser.Else_if_syContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TLONParser#while_stat}.
 	 * @param ctx the parse tree
 	 */

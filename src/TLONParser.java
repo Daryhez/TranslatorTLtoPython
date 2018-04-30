@@ -26,17 +26,19 @@ public class TLONParser extends Parser {
 	public static final int
 		RULE_parse = 0, RULE_from_input = 1, RULE_from_file = 2, RULE_stat = 3, 
 		RULE_compound_stat = 4, RULE_simple_stat = 5, RULE_assignment = 6, RULE_if_stat = 7, 
-		RULE_while_stat = 8, RULE_for_stat = 9, RULE_log = 10, RULE_leer = 11, 
-		RULE_funcion = 12, RULE_importar = 13, RULE_retornar = 14, RULE_condition_block = 15, 
-		RULE_stat_block = 16, RULE_array = 17, RULE_accessarray = 18, RULE_accesstoobject = 19, 
-		RULE_variableaccessarray = 20, RULE_variable = 21, RULE_parametro = 22, 
-		RULE_expr = 23, RULE_atom = 24, RULE_objeto = 25, RULE_keyvalue = 26;
+		RULE_if_condition_block = 8, RULE_else_sy = 9, RULE_else_if_sy = 10, RULE_while_stat = 11, 
+		RULE_for_stat = 12, RULE_log = 13, RULE_leer = 14, RULE_funcion = 15, 
+		RULE_importar = 16, RULE_retornar = 17, RULE_condition_block = 18, RULE_stat_block = 19, 
+		RULE_array = 20, RULE_accessarray = 21, RULE_accesstoobject = 22, RULE_variableaccessarray = 23, 
+		RULE_variable = 24, RULE_parametro = 25, RULE_expr = 26, RULE_atom = 27, 
+		RULE_objeto = 28, RULE_keyvalue = 29;
 	public static final String[] ruleNames = {
 		"parse", "from_input", "from_file", "stat", "compound_stat", "simple_stat", 
-		"assignment", "if_stat", "while_stat", "for_stat", "log", "leer", "funcion", 
-		"importar", "retornar", "condition_block", "stat_block", "array", "accessarray", 
-		"accesstoobject", "variableaccessarray", "variable", "parametro", "expr", 
-		"atom", "objeto", "keyvalue"
+		"assignment", "if_stat", "if_condition_block", "else_sy", "else_if_sy", 
+		"while_stat", "for_stat", "log", "leer", "funcion", "importar", "retornar", 
+		"condition_block", "stat_block", "array", "accessarray", "accesstoobject", 
+		"variableaccessarray", "variable", "parametro", "expr", "atom", "objeto", 
+		"keyvalue"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -44,7 +46,7 @@ public class TLONParser extends Parser {
 		"'-'", "'*'", "'/'", "'%'", "'^'", "'!'", "'='", "'('", "')'", "'{'", 
 		"'}'", "'['", "']'", "','", "':'", "'true'", "'false'", "'nil'", "'if'", 
 		"'else'", "'while'", "'log'", "'leer'", "'for'", "'in'", "'funcion'", 
-		"'end'", "'retorno'", "'importar'", "'desde'", "'todo'", "'.'"
+		"'end funcion'", "'retorno'", "'importar'", "'desde'", "'todo'", "'.'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "OR", "AND", "EQ", "NEQ", "GT", "LT", "GTEQ", "LTEQ", "PLUS", "MINUS", 
@@ -128,20 +130,20 @@ public class TLONParser extends Parser {
 		ParseContext _localctx = new ParseContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_parse);
 		try {
-			setState(56);
+			setState(62);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(54);
+				setState(60);
 				from_input();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(55);
+				setState(61);
 				from_file();
 				}
 				break;
@@ -183,9 +185,9 @@ public class TLONParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(64);
 			stat();
-			setState(59);
+			setState(65);
 			match(NEWLINE);
 			}
 		}
@@ -233,12 +235,12 @@ public class TLONParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65);
+			setState(71);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << OPAR) | (1L << OBRACE) | (1L << OKEY) | (1L << TRUE) | (1L << FALSE) | (1L << NIL) | (1L << IF) | (1L << WHILE) | (1L << LOG) | (1L << LEER) | (1L << FOR) | (1L << FUNCION) | (1L << IMPORT) | (1L << FROM) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING) | (1L << NEWLINE) | (1L << OTHER))) != 0)) {
 				{
-				setState(63);
+				setState(69);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case MINUS:
@@ -263,13 +265,13 @@ public class TLONParser extends Parser {
 				case STRING:
 				case OTHER:
 					{
-					setState(61);
+					setState(67);
 					stat();
 					}
 					break;
 				case NEWLINE:
 					{
-					setState(62);
+					setState(68);
 					match(NEWLINE);
 					}
 					break;
@@ -277,11 +279,11 @@ public class TLONParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(67);
+				setState(73);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(68);
+			setState(74);
 			match(EOF);
 			}
 		}
@@ -321,7 +323,7 @@ public class TLONParser extends Parser {
 		StatContext _localctx = new StatContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_stat);
 		try {
-			setState(72);
+			setState(78);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case MINUS:
@@ -343,7 +345,7 @@ public class TLONParser extends Parser {
 			case OTHER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(70);
+				setState(76);
 				simple_stat();
 				}
 				break;
@@ -353,7 +355,7 @@ public class TLONParser extends Parser {
 			case FUNCION:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(71);
+				setState(77);
 				compound_stat();
 				}
 				break;
@@ -403,34 +405,34 @@ public class TLONParser extends Parser {
 		Compound_statContext _localctx = new Compound_statContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_compound_stat);
 		try {
-			setState(78);
+			setState(84);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IF:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(74);
+				setState(80);
 				if_stat();
 				}
 				break;
 			case WHILE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(75);
+				setState(81);
 				while_stat();
 				}
 				break;
 			case FOR:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(76);
+				setState(82);
 				for_stat();
 				}
 				break;
 			case FUNCION:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(77);
+				setState(83);
 				funcion();
 				}
 				break;
@@ -488,57 +490,57 @@ public class TLONParser extends Parser {
 		Simple_statContext _localctx = new Simple_statContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_simple_stat);
 		try {
-			setState(89);
+			setState(95);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(80);
+				setState(86);
 				assignment();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(81);
+				setState(87);
 				log();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(82);
+				setState(88);
 				leer();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(83);
+				setState(89);
 				importar();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(84);
+				setState(90);
 				atom();
-				setState(85);
+				setState(91);
 				match(NEWLINE);
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(87);
+				setState(93);
 				expr(0);
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(88);
+				setState(94);
 				match(OTHER);
 				}
 				break;
@@ -586,22 +588,22 @@ public class TLONParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91);
+			setState(97);
 			variable();
-			setState(92);
+			setState(98);
 			match(ASSIGN);
-			setState(95);
+			setState(101);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(93);
+				setState(99);
 				assignment();
 				}
 				break;
 			case 2:
 				{
-				setState(94);
+				setState(100);
 				expr(0);
 				}
 				break;
@@ -620,22 +622,17 @@ public class TLONParser extends Parser {
 	}
 
 	public static class If_statContext extends ParserRuleContext {
-		public List<TerminalNode> IF() { return getTokens(TLONParser.IF); }
-		public TerminalNode IF(int i) {
-			return getToken(TLONParser.IF, i);
+		public If_condition_blockContext if_condition_block() {
+			return getRuleContext(If_condition_blockContext.class,0);
 		}
-		public List<Condition_blockContext> condition_block() {
-			return getRuleContexts(Condition_blockContext.class);
+		public List<Else_if_syContext> else_if_sy() {
+			return getRuleContexts(Else_if_syContext.class);
 		}
-		public Condition_blockContext condition_block(int i) {
-			return getRuleContext(Condition_blockContext.class,i);
+		public Else_if_syContext else_if_sy(int i) {
+			return getRuleContext(Else_if_syContext.class,i);
 		}
-		public List<TerminalNode> ELSE() { return getTokens(TLONParser.ELSE); }
-		public TerminalNode ELSE(int i) {
-			return getToken(TLONParser.ELSE, i);
-		}
-		public Stat_blockContext stat_block() {
-			return getRuleContext(Stat_blockContext.class,0);
+		public Else_syContext else_sy() {
+			return getRuleContext(Else_syContext.class,0);
 		}
 		public If_statContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -659,42 +656,163 @@ public class TLONParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(97);
-			match(IF);
-			setState(98);
-			condition_block();
-			setState(104);
+			setState(103);
+			if_condition_block();
+			setState(107);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(99);
-					match(ELSE);
-					setState(100);
-					match(IF);
-					setState(101);
-					condition_block();
+					setState(104);
+					else_if_sy();
 					}
 					} 
 				}
-				setState(106);
+				setState(109);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			}
-			setState(109);
+			setState(111);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ELSE) {
 				{
-				setState(107);
-				match(ELSE);
-				setState(108);
-				stat_block();
+				setState(110);
+				else_sy();
 				}
 			}
 
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class If_condition_blockContext extends ParserRuleContext {
+		public TerminalNode IF() { return getToken(TLONParser.IF, 0); }
+		public Condition_blockContext condition_block() {
+			return getRuleContext(Condition_blockContext.class,0);
+		}
+		public If_condition_blockContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_if_condition_block; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof TLONListener ) ((TLONListener)listener).enterIf_condition_block(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof TLONListener ) ((TLONListener)listener).exitIf_condition_block(this);
+		}
+	}
+
+	public final If_condition_blockContext if_condition_block() throws RecognitionException {
+		If_condition_blockContext _localctx = new If_condition_blockContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_if_condition_block);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(113);
+			match(IF);
+			setState(114);
+			condition_block();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Else_syContext extends ParserRuleContext {
+		public TerminalNode ELSE() { return getToken(TLONParser.ELSE, 0); }
+		public Stat_blockContext stat_block() {
+			return getRuleContext(Stat_blockContext.class,0);
+		}
+		public Else_syContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_else_sy; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof TLONListener ) ((TLONListener)listener).enterElse_sy(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof TLONListener ) ((TLONListener)listener).exitElse_sy(this);
+		}
+	}
+
+	public final Else_syContext else_sy() throws RecognitionException {
+		Else_syContext _localctx = new Else_syContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_else_sy);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(116);
+			match(ELSE);
+			setState(117);
+			stat_block();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Else_if_syContext extends ParserRuleContext {
+		public TerminalNode ELSE() { return getToken(TLONParser.ELSE, 0); }
+		public TerminalNode IF() { return getToken(TLONParser.IF, 0); }
+		public Condition_blockContext condition_block() {
+			return getRuleContext(Condition_blockContext.class,0);
+		}
+		public Else_if_syContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_else_if_sy; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof TLONListener ) ((TLONListener)listener).enterElse_if_sy(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof TLONListener ) ((TLONListener)listener).exitElse_if_sy(this);
+		}
+	}
+
+	public final Else_if_syContext else_if_sy() throws RecognitionException {
+		Else_if_syContext _localctx = new Else_if_syContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_else_if_sy);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(119);
+			match(ELSE);
+			setState(120);
+			match(IF);
+			setState(121);
+			condition_block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -732,15 +850,15 @@ public class TLONParser extends Parser {
 
 	public final While_statContext while_stat() throws RecognitionException {
 		While_statContext _localctx = new While_statContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_while_stat);
+		enterRule(_localctx, 22, RULE_while_stat);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(111);
+			setState(123);
 			match(WHILE);
-			setState(112);
+			setState(124);
 			expr(0);
-			setState(113);
+			setState(125);
 			stat_block();
 			}
 		}
@@ -781,19 +899,19 @@ public class TLONParser extends Parser {
 
 	public final For_statContext for_stat() throws RecognitionException {
 		For_statContext _localctx = new For_statContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_for_stat);
+		enterRule(_localctx, 24, RULE_for_stat);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(115);
+			setState(127);
 			match(FOR);
-			setState(116);
+			setState(128);
 			match(ID);
-			setState(117);
+			setState(129);
 			match(IN);
-			setState(118);
+			setState(130);
 			expr(0);
-			setState(119);
+			setState(131);
 			stat_block();
 			}
 		}
@@ -831,17 +949,17 @@ public class TLONParser extends Parser {
 
 	public final LogContext log() throws RecognitionException {
 		LogContext _localctx = new LogContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_log);
+		enterRule(_localctx, 26, RULE_log);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(121);
+			setState(133);
 			match(LOG);
-			setState(122);
+			setState(134);
 			match(OPAR);
-			setState(123);
+			setState(135);
 			expr(0);
-			setState(124);
+			setState(136);
 			match(CPAR);
 			}
 		}
@@ -879,17 +997,17 @@ public class TLONParser extends Parser {
 
 	public final LeerContext leer() throws RecognitionException {
 		LeerContext _localctx = new LeerContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_leer);
+		enterRule(_localctx, 28, RULE_leer);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(126);
+			setState(138);
 			match(LEER);
-			setState(127);
+			setState(139);
 			match(OPAR);
-			setState(128);
+			setState(140);
 			expr(0);
-			setState(129);
+			setState(141);
 			match(CPAR);
 			}
 		}
@@ -909,9 +1027,6 @@ public class TLONParser extends Parser {
 		public TerminalNode ID() { return getToken(TLONParser.ID, 0); }
 		public TerminalNode OPAR() { return getToken(TLONParser.OPAR, 0); }
 		public TerminalNode CPAR() { return getToken(TLONParser.CPAR, 0); }
-		public RetornarContext retornar() {
-			return getRuleContext(RetornarContext.class,0);
-		}
 		public TerminalNode END() { return getToken(TLONParser.END, 0); }
 		public List<ParametroContext> parametro() {
 			return getRuleContexts(ParametroContext.class);
@@ -928,6 +1043,9 @@ public class TLONParser extends Parser {
 		}
 		public StatContext stat(int i) {
 			return getRuleContext(StatContext.class,i);
+		}
+		public RetornarContext retornar() {
+			return getRuleContext(RetornarContext.class,0);
 		}
 		public List<TerminalNode> COMMA() { return getTokens(TLONParser.COMMA); }
 		public TerminalNode COMMA(int i) {
@@ -949,56 +1067,56 @@ public class TLONParser extends Parser {
 
 	public final FuncionContext funcion() throws RecognitionException {
 		FuncionContext _localctx = new FuncionContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_funcion);
+		enterRule(_localctx, 30, RULE_funcion);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(131);
+			setState(143);
 			match(FUNCION);
-			setState(132);
+			setState(144);
 			match(ID);
-			setState(133);
+			setState(145);
 			match(OPAR);
-			setState(142);
+			setState(154);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ID) {
 				{
-				setState(134);
+				setState(146);
 				parametro();
-				setState(139);
+				setState(151);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(135);
+					setState(147);
 					match(COMMA);
-					setState(136);
+					setState(148);
 					parametro();
 					}
 					}
-					setState(141);
+					setState(153);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(144);
+			setState(156);
 			match(CPAR);
-			setState(149);
+			setState(161);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << OPAR) | (1L << OBRACE) | (1L << OKEY) | (1L << TRUE) | (1L << FALSE) | (1L << NIL) | (1L << IF) | (1L << WHILE) | (1L << LOG) | (1L << LEER) | (1L << FOR) | (1L << FUNCION) | (1L << IMPORT) | (1L << FROM) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING) | (1L << NEWLINE) | (1L << OTHER))) != 0)) {
 				{
-				setState(147);
+				setState(159);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case NEWLINE:
 					{
-					setState(145);
+					setState(157);
 					match(NEWLINE);
 					}
 					break;
@@ -1024,7 +1142,7 @@ public class TLONParser extends Parser {
 				case STRING:
 				case OTHER:
 					{
-					setState(146);
+					setState(158);
 					stat();
 					}
 					break;
@@ -1032,13 +1150,21 @@ public class TLONParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(151);
+				setState(163);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(152);
-			retornar();
-			setState(153);
+			setState(165);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==RETORNO) {
+				{
+				setState(164);
+				retornar();
+				}
+			}
+
+			setState(167);
 			match(END);
 			}
 		}
@@ -1080,32 +1206,32 @@ public class TLONParser extends Parser {
 
 	public final ImportarContext importar() throws RecognitionException {
 		ImportarContext _localctx = new ImportarContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_importar);
+		enterRule(_localctx, 32, RULE_importar);
 		int _la;
 		try {
-			setState(168);
+			setState(182);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IMPORT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(155);
+				setState(169);
 				match(IMPORT);
-				setState(156);
+				setState(170);
 				match(ID);
-				setState(161);
+				setState(175);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==POINT) {
 					{
 					{
-					setState(157);
+					setState(171);
 					match(POINT);
-					setState(158);
+					setState(172);
 					match(ID);
 					}
 					}
-					setState(163);
+					setState(177);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -1114,13 +1240,13 @@ public class TLONParser extends Parser {
 			case FROM:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(164);
+				setState(178);
 				match(FROM);
-				setState(165);
+				setState(179);
 				match(ID);
-				setState(166);
+				setState(180);
 				match(IMPORT);
-				setState(167);
+				setState(181);
 				match(ID);
 				}
 				break;
@@ -1163,19 +1289,19 @@ public class TLONParser extends Parser {
 
 	public final RetornarContext retornar() throws RecognitionException {
 		RetornarContext _localctx = new RetornarContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_retornar);
+		enterRule(_localctx, 34, RULE_retornar);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(170);
+			setState(184);
 			match(RETORNO);
-			setState(171);
+			setState(185);
 			match(OPAR);
-			setState(172);
+			setState(186);
 			expr(0);
-			setState(173);
+			setState(187);
 			match(CPAR);
-			setState(174);
+			setState(188);
 			match(NEWLINE);
 			}
 		}
@@ -1214,24 +1340,24 @@ public class TLONParser extends Parser {
 
 	public final Condition_blockContext condition_block() throws RecognitionException {
 		Condition_blockContext _localctx = new Condition_blockContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_condition_block);
+		enterRule(_localctx, 36, RULE_condition_block);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(176);
+			setState(190);
 			expr(0);
-			setState(178);
+			setState(192);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(177);
+				setState(191);
 				match(NEWLINE);
 				}
 			}
 
-			setState(180);
+			setState(194);
 			stat_block();
 			}
 		}
@@ -1275,23 +1401,23 @@ public class TLONParser extends Parser {
 
 	public final Stat_blockContext stat_block() throws RecognitionException {
 		Stat_blockContext _localctx = new Stat_blockContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_stat_block);
+		enterRule(_localctx, 38, RULE_stat_block);
 		int _la;
 		try {
-			setState(194);
+			setState(208);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(182);
+				setState(196);
 				match(OBRACE);
-				setState(187);
+				setState(201);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << OPAR) | (1L << OBRACE) | (1L << OKEY) | (1L << TRUE) | (1L << FALSE) | (1L << NIL) | (1L << IF) | (1L << WHILE) | (1L << LOG) | (1L << LEER) | (1L << FOR) | (1L << FUNCION) | (1L << IMPORT) | (1L << FROM) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING) | (1L << NEWLINE) | (1L << OTHER))) != 0)) {
 					{
-					setState(185);
+					setState(199);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case MINUS:
@@ -1316,13 +1442,13 @@ public class TLONParser extends Parser {
 					case STRING:
 					case OTHER:
 						{
-						setState(183);
+						setState(197);
 						stat();
 						}
 						break;
 					case NEWLINE:
 						{
-						setState(184);
+						setState(198);
 						match(NEWLINE);
 						}
 						break;
@@ -1330,20 +1456,20 @@ public class TLONParser extends Parser {
 						throw new NoViableAltException(this);
 					}
 					}
-					setState(189);
+					setState(203);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(190);
+				setState(204);
 				match(CBRACE);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(191);
+				setState(205);
 				stat();
-				setState(192);
+				setState(206);
 				match(NEWLINE);
 				}
 				break;
@@ -1396,71 +1522,71 @@ public class TLONParser extends Parser {
 
 	public final ArrayContext array() throws RecognitionException {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_array);
+		enterRule(_localctx, 40, RULE_array);
 		int _la;
 		try {
-			setState(219);
+			setState(233);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(196);
+				setState(210);
 				match(OKEY);
-				setState(205);
+				setState(219);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << OPAR) | (1L << OBRACE) | (1L << OKEY) | (1L << TRUE) | (1L << FALSE) | (1L << NIL) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 					{
-					setState(197);
+					setState(211);
 					expr(0);
-					setState(202);
+					setState(216);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(198);
+						setState(212);
 						match(COMMA);
-						setState(199);
+						setState(213);
 						expr(0);
 						}
 						}
-						setState(204);
+						setState(218);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(207);
+				setState(221);
 				match(CKEY);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(208);
+				setState(222);
 				match(OKEY);
-				setState(209);
+				setState(223);
 				((ArrayContext)_localctx).start = expr(0);
-				setState(210);
+				setState(224);
 				match(POINTS);
-				setState(214);
+				setState(228);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
 				case 1:
 					{
-					setState(211);
+					setState(225);
 					((ArrayContext)_localctx).step = expr(0);
-					setState(212);
+					setState(226);
 					match(POINTS);
 					}
 					break;
 				}
-				setState(216);
+				setState(230);
 				((ArrayContext)_localctx).end = expr(0);
-				setState(217);
+				setState(231);
 				match(CKEY);
 				}
 				break;
@@ -1502,17 +1628,17 @@ public class TLONParser extends Parser {
 
 	public final AccessarrayContext accessarray() throws RecognitionException {
 		AccessarrayContext _localctx = new AccessarrayContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_accessarray);
+		enterRule(_localctx, 42, RULE_accessarray);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(221);
+			setState(235);
 			variable();
-			setState(222);
+			setState(236);
 			match(OKEY);
-			setState(223);
+			setState(237);
 			expr(0);
-			setState(224);
+			setState(238);
 			match(CKEY);
 			}
 		}
@@ -1551,15 +1677,15 @@ public class TLONParser extends Parser {
 
 	public final AccesstoobjectContext accesstoobject() throws RecognitionException {
 		AccesstoobjectContext _localctx = new AccesstoobjectContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_accesstoobject);
+		enterRule(_localctx, 44, RULE_accesstoobject);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(226);
+			setState(240);
 			variable();
-			setState(227);
+			setState(241);
 			match(POINT);
-			setState(228);
+			setState(242);
 			variableaccessarray();
 			}
 		}
@@ -1597,22 +1723,22 @@ public class TLONParser extends Parser {
 
 	public final VariableaccessarrayContext variableaccessarray() throws RecognitionException {
 		VariableaccessarrayContext _localctx = new VariableaccessarrayContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_variableaccessarray);
+		enterRule(_localctx, 46, RULE_variableaccessarray);
 		try {
-			setState(232);
+			setState(246);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(230);
+				setState(244);
 				variable();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(231);
+				setState(245);
 				accessarray();
 				}
 				break;
@@ -1668,70 +1794,70 @@ public class TLONParser extends Parser {
 
 	public final VariableContext variable() throws RecognitionException {
 		VariableContext _localctx = new VariableContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_variable);
+		enterRule(_localctx, 48, RULE_variable);
 		int _la;
 		try {
 			int _alt;
-			setState(268);
+			setState(282);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,30,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(234);
+				setState(248);
 				match(ID);
-				setState(239);
+				setState(253);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,24,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,25,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(235);
+						setState(249);
 						match(POINT);
-						setState(236);
+						setState(250);
 						match(ID);
 						}
 						} 
 					}
-					setState(241);
+					setState(255);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,24,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,25,_ctx);
 				}
-				setState(254);
+				setState(268);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
 				case 1:
 					{
-					setState(242);
+					setState(256);
 					match(OPAR);
-					setState(251);
+					setState(265);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << OPAR) | (1L << OBRACE) | (1L << OKEY) | (1L << TRUE) | (1L << FALSE) | (1L << NIL) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 						{
-						setState(243);
+						setState(257);
 						expr(0);
-						setState(248);
+						setState(262);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						while (_la==COMMA) {
 							{
 							{
-							setState(244);
+							setState(258);
 							match(COMMA);
-							setState(245);
+							setState(259);
 							expr(0);
 							}
 							}
-							setState(250);
+							setState(264);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
 						}
 						}
 					}
 
-					setState(253);
+					setState(267);
 					match(CPAR);
 					}
 					break;
@@ -1741,29 +1867,29 @@ public class TLONParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(256);
+				setState(270);
 				match(ID);
-				setState(261);
+				setState(275);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==POINT) {
 					{
 					{
-					setState(257);
+					setState(271);
 					match(POINT);
-					setState(258);
+					setState(272);
 					match(ID);
 					}
 					}
-					setState(263);
+					setState(277);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(264);
+				setState(278);
 				match(OKEY);
-				setState(265);
+				setState(279);
 				expr(0);
-				setState(266);
+				setState(280);
 				match(CKEY);
 				}
 				break;
@@ -1802,21 +1928,21 @@ public class TLONParser extends Parser {
 
 	public final ParametroContext parametro() throws RecognitionException {
 		ParametroContext _localctx = new ParametroContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_parametro);
+		enterRule(_localctx, 50, RULE_parametro);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(270);
+			setState(284);
 			match(ID);
-			setState(273);
+			setState(287);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ASSIGN) {
 				{
-				setState(271);
+				setState(285);
 				match(ASSIGN);
-				setState(272);
+				setState(286);
 				expr(0);
 				}
 			}
@@ -2066,14 +2192,14 @@ public class TLONParser extends Parser {
 		int _parentState = getState();
 		ExprContext _localctx = new ExprContext(_ctx, _parentState);
 		ExprContext _prevctx = _localctx;
-		int _startState = 46;
-		enterRecursionRule(_localctx, 46, RULE_expr, _p);
+		int _startState = 52;
+		enterRecursionRule(_localctx, 52, RULE_expr, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(285);
+			setState(299);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case MINUS:
@@ -2082,9 +2208,9 @@ public class TLONParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(276);
+				setState(290);
 				match(MINUS);
-				setState(277);
+				setState(291);
 				expr(10);
 				}
 				break;
@@ -2093,9 +2219,9 @@ public class TLONParser extends Parser {
 				_localctx = new NotExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(278);
+				setState(292);
 				match(NOT);
-				setState(279);
+				setState(293);
 				expr(9);
 				}
 				break;
@@ -2104,11 +2230,11 @@ public class TLONParser extends Parser {
 				_localctx = new ParExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(280);
+				setState(294);
 				match(OPAR);
-				setState(281);
+				setState(295);
 				expr(0);
-				setState(282);
+				setState(296);
 				match(CPAR);
 				}
 				break;
@@ -2125,7 +2251,7 @@ public class TLONParser extends Parser {
 				_localctx = new AtomExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(284);
+				setState(298);
 				atom();
 				}
 				break;
@@ -2133,27 +2259,27 @@ public class TLONParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(310);
+			setState(324);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,33,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,34,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(308);
+					setState(322);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,33,_ctx) ) {
 					case 1:
 						{
 						_localctx = new PowExprContext(new ExprContext(_parentctx, _parentState));
 						((PowExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(287);
+						setState(301);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
-						setState(288);
+						setState(302);
 						match(POW);
-						setState(289);
+						setState(303);
 						((PowExprContext)_localctx).right = expr(11);
 						}
 						break;
@@ -2162,9 +2288,9 @@ public class TLONParser extends Parser {
 						_localctx = new MultiplicationExprContext(new ExprContext(_parentctx, _parentState));
 						((MultiplicationExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(290);
+						setState(304);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(291);
+						setState(305);
 						((MultiplicationExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MULT) | (1L << DIV) | (1L << MOD))) != 0)) ) {
@@ -2175,7 +2301,7 @@ public class TLONParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(292);
+						setState(306);
 						((MultiplicationExprContext)_localctx).right = expr(9);
 						}
 						break;
@@ -2184,9 +2310,9 @@ public class TLONParser extends Parser {
 						_localctx = new AdditiveExprContext(new ExprContext(_parentctx, _parentState));
 						((AdditiveExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(293);
+						setState(307);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(294);
+						setState(308);
 						((AdditiveExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==PLUS || _la==MINUS) ) {
@@ -2197,7 +2323,7 @@ public class TLONParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(295);
+						setState(309);
 						((AdditiveExprContext)_localctx).right = expr(8);
 						}
 						break;
@@ -2206,9 +2332,9 @@ public class TLONParser extends Parser {
 						_localctx = new RelationalExprContext(new ExprContext(_parentctx, _parentState));
 						((RelationalExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(296);
+						setState(310);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(297);
+						setState(311);
 						((RelationalExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GT) | (1L << LT) | (1L << GTEQ) | (1L << LTEQ))) != 0)) ) {
@@ -2219,7 +2345,7 @@ public class TLONParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(298);
+						setState(312);
 						((RelationalExprContext)_localctx).right = expr(7);
 						}
 						break;
@@ -2228,9 +2354,9 @@ public class TLONParser extends Parser {
 						_localctx = new EqualityExprContext(new ExprContext(_parentctx, _parentState));
 						((EqualityExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(299);
+						setState(313);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(300);
+						setState(314);
 						((EqualityExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==EQ || _la==NEQ) ) {
@@ -2241,7 +2367,7 @@ public class TLONParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(301);
+						setState(315);
 						((EqualityExprContext)_localctx).right = expr(6);
 						}
 						break;
@@ -2250,11 +2376,11 @@ public class TLONParser extends Parser {
 						_localctx = new AndExprContext(new ExprContext(_parentctx, _parentState));
 						((AndExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(302);
+						setState(316);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(303);
+						setState(317);
 						match(AND);
-						setState(304);
+						setState(318);
 						((AndExprContext)_localctx).right = expr(5);
 						}
 						break;
@@ -2263,20 +2389,20 @@ public class TLONParser extends Parser {
 						_localctx = new OrExprContext(new ExprContext(_parentctx, _parentState));
 						((OrExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(305);
+						setState(319);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(306);
+						setState(320);
 						match(OR);
-						setState(307);
+						setState(321);
 						((OrExprContext)_localctx).right = expr(4);
 						}
 						break;
 					}
 					} 
 				}
-				setState(312);
+				setState(326);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,33,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,34,_ctx);
 			}
 			}
 		}
@@ -2425,17 +2551,17 @@ public class TLONParser extends Parser {
 
 	public final AtomContext atom() throws RecognitionException {
 		AtomContext _localctx = new AtomContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_atom);
+		enterRule(_localctx, 54, RULE_atom);
 		int _la;
 		try {
-			setState(322);
+			setState(336);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,35,_ctx) ) {
 			case 1:
 				_localctx = new NumberAtomContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(313);
+				setState(327);
 				_la = _input.LA(1);
 				if ( !(_la==INT || _la==FLOAT) ) {
 				_errHandler.recoverInline(this);
@@ -2451,7 +2577,7 @@ public class TLONParser extends Parser {
 				_localctx = new BooleanAtomContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(314);
+				setState(328);
 				_la = _input.LA(1);
 				if ( !(_la==TRUE || _la==FALSE) ) {
 				_errHandler.recoverInline(this);
@@ -2467,7 +2593,7 @@ public class TLONParser extends Parser {
 				_localctx = new StringAtomContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(315);
+				setState(329);
 				match(STRING);
 				}
 				break;
@@ -2475,7 +2601,7 @@ public class TLONParser extends Parser {
 				_localctx = new ArrayAtomContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(316);
+				setState(330);
 				array();
 				}
 				break;
@@ -2483,7 +2609,7 @@ public class TLONParser extends Parser {
 				_localctx = new ObjetoAtomContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(317);
+				setState(331);
 				objeto();
 				}
 				break;
@@ -2491,7 +2617,7 @@ public class TLONParser extends Parser {
 				_localctx = new AccessToarrayContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(318);
+				setState(332);
 				accessarray();
 				}
 				break;
@@ -2499,7 +2625,7 @@ public class TLONParser extends Parser {
 				_localctx = new AccessObjectContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(319);
+				setState(333);
 				accesstoobject();
 				}
 				break;
@@ -2507,7 +2633,7 @@ public class TLONParser extends Parser {
 				_localctx = new AccessVariableContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(320);
+				setState(334);
 				variable();
 				}
 				break;
@@ -2515,7 +2641,7 @@ public class TLONParser extends Parser {
 				_localctx = new NilAtomContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(321);
+				setState(335);
 				match(NIL);
 				}
 				break;
@@ -2561,40 +2687,40 @@ public class TLONParser extends Parser {
 
 	public final ObjetoContext objeto() throws RecognitionException {
 		ObjetoContext _localctx = new ObjetoContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_objeto);
+		enterRule(_localctx, 56, RULE_objeto);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(324);
+			setState(338);
 			match(OBRACE);
-			setState(333);
+			setState(347);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ID) {
 				{
-				setState(325);
+				setState(339);
 				keyvalue();
-				setState(330);
+				setState(344);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(326);
+					setState(340);
 					match(COMMA);
-					setState(327);
+					setState(341);
 					keyvalue();
 					}
 					}
-					setState(332);
+					setState(346);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(335);
+			setState(349);
 			match(CBRACE);
 			}
 		}
@@ -2631,15 +2757,15 @@ public class TLONParser extends Parser {
 
 	public final KeyvalueContext keyvalue() throws RecognitionException {
 		KeyvalueContext _localctx = new KeyvalueContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_keyvalue);
+		enterRule(_localctx, 58, RULE_keyvalue);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(337);
+			setState(351);
 			match(ID);
-			setState(338);
+			setState(352);
 			match(POINTS);
-			setState(339);
+			setState(353);
 			expr(0);
 			}
 		}
@@ -2656,7 +2782,7 @@ public class TLONParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 23:
+		case 26:
 			return expr_sempred((ExprContext)_localctx, predIndex);
 		}
 		return true;
@@ -2682,130 +2808,135 @@ public class TLONParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\63\u0158\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\63\u0166\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
-		"\4\32\t\32\4\33\t\33\4\34\t\34\3\2\3\2\5\2;\n\2\3\3\3\3\3\3\3\4\3\4\7"+
-		"\4B\n\4\f\4\16\4E\13\4\3\4\3\4\3\5\3\5\5\5K\n\5\3\6\3\6\3\6\3\6\5\6Q\n"+
-		"\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7\\\n\7\3\b\3\b\3\b\3\b\5\bb"+
-		"\n\b\3\t\3\t\3\t\3\t\3\t\7\ti\n\t\f\t\16\tl\13\t\3\t\3\t\5\tp\n\t\3\n"+
-		"\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\r\3\r"+
-		"\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\7\16\u008c\n\16\f\16\16\16"+
-		"\u008f\13\16\5\16\u0091\n\16\3\16\3\16\3\16\7\16\u0096\n\16\f\16\16\16"+
-		"\u0099\13\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\7\17\u00a2\n\17\f\17\16"+
-		"\17\u00a5\13\17\3\17\3\17\3\17\3\17\5\17\u00ab\n\17\3\20\3\20\3\20\3\20"+
-		"\3\20\3\20\3\21\3\21\5\21\u00b5\n\21\3\21\3\21\3\22\3\22\3\22\7\22\u00bc"+
-		"\n\22\f\22\16\22\u00bf\13\22\3\22\3\22\3\22\3\22\5\22\u00c5\n\22\3\23"+
-		"\3\23\3\23\3\23\7\23\u00cb\n\23\f\23\16\23\u00ce\13\23\5\23\u00d0\n\23"+
-		"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00d9\n\23\3\23\3\23\3\23\5\23"+
-		"\u00de\n\23\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\26\3\26\5\26"+
-		"\u00eb\n\26\3\27\3\27\3\27\7\27\u00f0\n\27\f\27\16\27\u00f3\13\27\3\27"+
-		"\3\27\3\27\3\27\7\27\u00f9\n\27\f\27\16\27\u00fc\13\27\5\27\u00fe\n\27"+
-		"\3\27\5\27\u0101\n\27\3\27\3\27\3\27\7\27\u0106\n\27\f\27\16\27\u0109"+
-		"\13\27\3\27\3\27\3\27\3\27\5\27\u010f\n\27\3\30\3\30\3\30\5\30\u0114\n"+
-		"\30\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u0120\n\31"+
-		"\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31"+
-		"\3\31\3\31\3\31\3\31\3\31\3\31\3\31\7\31\u0137\n\31\f\31\16\31\u013a\13"+
-		"\31\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u0145\n\32\3\33"+
-		"\3\33\3\33\3\33\7\33\u014b\n\33\f\33\16\33\u014e\13\33\5\33\u0150\n\33"+
-		"\3\33\3\33\3\34\3\34\3\34\3\34\3\34\2\3\60\35\2\4\6\b\n\f\16\20\22\24"+
-		"\26\30\32\34\36 \"$&(*,.\60\62\64\66\2\b\3\2\r\17\3\2\13\f\3\2\7\n\3\2"+
-		"\5\6\3\2-.\3\2\33\34\2\u0176\2:\3\2\2\2\4<\3\2\2\2\6C\3\2\2\2\bJ\3\2\2"+
-		"\2\nP\3\2\2\2\f[\3\2\2\2\16]\3\2\2\2\20c\3\2\2\2\22q\3\2\2\2\24u\3\2\2"+
-		"\2\26{\3\2\2\2\30\u0080\3\2\2\2\32\u0085\3\2\2\2\34\u00aa\3\2\2\2\36\u00ac"+
-		"\3\2\2\2 \u00b2\3\2\2\2\"\u00c4\3\2\2\2$\u00dd\3\2\2\2&\u00df\3\2\2\2"+
-		"(\u00e4\3\2\2\2*\u00ea\3\2\2\2,\u010e\3\2\2\2.\u0110\3\2\2\2\60\u011f"+
-		"\3\2\2\2\62\u0144\3\2\2\2\64\u0146\3\2\2\2\66\u0153\3\2\2\28;\5\4\3\2"+
-		"9;\5\6\4\2:8\3\2\2\2:9\3\2\2\2;\3\3\2\2\2<=\5\b\5\2=>\7\62\2\2>\5\3\2"+
-		"\2\2?B\5\b\5\2@B\7\62\2\2A?\3\2\2\2A@\3\2\2\2BE\3\2\2\2CA\3\2\2\2CD\3"+
-		"\2\2\2DF\3\2\2\2EC\3\2\2\2FG\7\2\2\3G\7\3\2\2\2HK\5\f\7\2IK\5\n\6\2JH"+
-		"\3\2\2\2JI\3\2\2\2K\t\3\2\2\2LQ\5\20\t\2MQ\5\22\n\2NQ\5\24\13\2OQ\5\32"+
-		"\16\2PL\3\2\2\2PM\3\2\2\2PN\3\2\2\2PO\3\2\2\2Q\13\3\2\2\2R\\\5\16\b\2"+
-		"S\\\5\26\f\2T\\\5\30\r\2U\\\5\34\17\2VW\5\62\32\2WX\7\62\2\2X\\\3\2\2"+
-		"\2Y\\\5\60\31\2Z\\\7\63\2\2[R\3\2\2\2[S\3\2\2\2[T\3\2\2\2[U\3\2\2\2[V"+
-		"\3\2\2\2[Y\3\2\2\2[Z\3\2\2\2\\\r\3\2\2\2]^\5,\27\2^a\7\22\2\2_b\5\16\b"+
-		"\2`b\5\60\31\2a_\3\2\2\2a`\3\2\2\2b\17\3\2\2\2cd\7\36\2\2dj\5 \21\2ef"+
-		"\7\37\2\2fg\7\36\2\2gi\5 \21\2he\3\2\2\2il\3\2\2\2jh\3\2\2\2jk\3\2\2\2"+
-		"ko\3\2\2\2lj\3\2\2\2mn\7\37\2\2np\5\"\22\2om\3\2\2\2op\3\2\2\2p\21\3\2"+
-		"\2\2qr\7 \2\2rs\5\60\31\2st\5\"\22\2t\23\3\2\2\2uv\7#\2\2vw\7,\2\2wx\7"+
-		"$\2\2xy\5\60\31\2yz\5\"\22\2z\25\3\2\2\2{|\7!\2\2|}\7\23\2\2}~\5\60\31"+
-		"\2~\177\7\24\2\2\177\27\3\2\2\2\u0080\u0081\7\"\2\2\u0081\u0082\7\23\2"+
-		"\2\u0082\u0083\5\60\31\2\u0083\u0084\7\24\2\2\u0084\31\3\2\2\2\u0085\u0086"+
-		"\7%\2\2\u0086\u0087\7,\2\2\u0087\u0090\7\23\2\2\u0088\u008d\5.\30\2\u0089"+
-		"\u008a\7\31\2\2\u008a\u008c\5.\30\2\u008b\u0089\3\2\2\2\u008c\u008f\3"+
-		"\2\2\2\u008d\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0091\3\2\2\2\u008f"+
-		"\u008d\3\2\2\2\u0090\u0088\3\2\2\2\u0090\u0091\3\2\2\2\u0091\u0092\3\2"+
-		"\2\2\u0092\u0097\7\24\2\2\u0093\u0096\7\62\2\2\u0094\u0096\5\b\5\2\u0095"+
-		"\u0093\3\2\2\2\u0095\u0094\3\2\2\2\u0096\u0099\3\2\2\2\u0097\u0095\3\2"+
-		"\2\2\u0097\u0098\3\2\2\2\u0098\u009a\3\2\2\2\u0099\u0097\3\2\2\2\u009a"+
-		"\u009b\5\36\20\2\u009b\u009c\7&\2\2\u009c\33\3\2\2\2\u009d\u009e\7(\2"+
-		"\2\u009e\u00a3\7,\2\2\u009f\u00a0\7+\2\2\u00a0\u00a2\7,\2\2\u00a1\u009f"+
-		"\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4"+
-		"\u00ab\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a6\u00a7\7)\2\2\u00a7\u00a8\7,\2"+
-		"\2\u00a8\u00a9\7(\2\2\u00a9\u00ab\7,\2\2\u00aa\u009d\3\2\2\2\u00aa\u00a6"+
-		"\3\2\2\2\u00ab\35\3\2\2\2\u00ac\u00ad\7\'\2\2\u00ad\u00ae\7\23\2\2\u00ae"+
-		"\u00af\5\60\31\2\u00af\u00b0\7\24\2\2\u00b0\u00b1\7\62\2\2\u00b1\37\3"+
-		"\2\2\2\u00b2\u00b4\5\60\31\2\u00b3\u00b5\7\62\2\2\u00b4\u00b3\3\2\2\2"+
-		"\u00b4\u00b5\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6\u00b7\5\"\22\2\u00b7!\3"+
-		"\2\2\2\u00b8\u00bd\7\25\2\2\u00b9\u00bc\5\b\5\2\u00ba\u00bc\7\62\2\2\u00bb"+
-		"\u00b9\3\2\2\2\u00bb\u00ba\3\2\2\2\u00bc\u00bf\3\2\2\2\u00bd\u00bb\3\2"+
-		"\2\2\u00bd\u00be\3\2\2\2\u00be\u00c0\3\2\2\2\u00bf\u00bd\3\2\2\2\u00c0"+
-		"\u00c5\7\26\2\2\u00c1\u00c2\5\b\5\2\u00c2\u00c3\7\62\2\2\u00c3\u00c5\3"+
-		"\2\2\2\u00c4\u00b8\3\2\2\2\u00c4\u00c1\3\2\2\2\u00c5#\3\2\2\2\u00c6\u00cf"+
-		"\7\27\2\2\u00c7\u00cc\5\60\31\2\u00c8\u00c9\7\31\2\2\u00c9\u00cb\5\60"+
-		"\31\2\u00ca\u00c8\3\2\2\2\u00cb\u00ce\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cc"+
-		"\u00cd\3\2\2\2\u00cd\u00d0\3\2\2\2\u00ce\u00cc\3\2\2\2\u00cf\u00c7\3\2"+
-		"\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1\u00de\7\30\2\2\u00d2"+
-		"\u00d3\7\27\2\2\u00d3\u00d4\5\60\31\2\u00d4\u00d8\7\32\2\2\u00d5\u00d6"+
-		"\5\60\31\2\u00d6\u00d7\7\32\2\2\u00d7\u00d9\3\2\2\2\u00d8\u00d5\3\2\2"+
-		"\2\u00d8\u00d9\3\2\2\2\u00d9\u00da\3\2\2\2\u00da\u00db\5\60\31\2\u00db"+
-		"\u00dc\7\30\2\2\u00dc\u00de\3\2\2\2\u00dd\u00c6\3\2\2\2\u00dd\u00d2\3"+
-		"\2\2\2\u00de%\3\2\2\2\u00df\u00e0\5,\27\2\u00e0\u00e1\7\27\2\2\u00e1\u00e2"+
-		"\5\60\31\2\u00e2\u00e3\7\30\2\2\u00e3\'\3\2\2\2\u00e4\u00e5\5,\27\2\u00e5"+
-		"\u00e6\7+\2\2\u00e6\u00e7\5*\26\2\u00e7)\3\2\2\2\u00e8\u00eb\5,\27\2\u00e9"+
-		"\u00eb\5&\24\2\u00ea\u00e8\3\2\2\2\u00ea\u00e9\3\2\2\2\u00eb+\3\2\2\2"+
-		"\u00ec\u00f1\7,\2\2\u00ed\u00ee\7+\2\2\u00ee\u00f0\7,\2\2\u00ef\u00ed"+
-		"\3\2\2\2\u00f0\u00f3\3\2\2\2\u00f1\u00ef\3\2\2\2\u00f1\u00f2\3\2\2\2\u00f2"+
-		"\u0100\3\2\2\2\u00f3\u00f1\3\2\2\2\u00f4\u00fd\7\23\2\2\u00f5\u00fa\5"+
-		"\60\31\2\u00f6\u00f7\7\31\2\2\u00f7\u00f9\5\60\31\2\u00f8\u00f6\3\2\2"+
-		"\2\u00f9\u00fc\3\2\2\2\u00fa\u00f8\3\2\2\2\u00fa\u00fb\3\2\2\2\u00fb\u00fe"+
-		"\3\2\2\2\u00fc\u00fa\3\2\2\2\u00fd\u00f5\3\2\2\2\u00fd\u00fe\3\2\2\2\u00fe"+
-		"\u00ff\3\2\2\2\u00ff\u0101\7\24\2\2\u0100\u00f4\3\2\2\2\u0100\u0101\3"+
-		"\2\2\2\u0101\u010f\3\2\2\2\u0102\u0107\7,\2\2\u0103\u0104\7+\2\2\u0104"+
-		"\u0106\7,\2\2\u0105\u0103\3\2\2\2\u0106\u0109\3\2\2\2\u0107\u0105\3\2"+
-		"\2\2\u0107\u0108\3\2\2\2\u0108\u010a\3\2\2\2\u0109\u0107\3\2\2\2\u010a"+
-		"\u010b\7\27\2\2\u010b\u010c\5\60\31\2\u010c\u010d\7\30\2\2\u010d\u010f"+
-		"\3\2\2\2\u010e\u00ec\3\2\2\2\u010e\u0102\3\2\2\2\u010f-\3\2\2\2\u0110"+
-		"\u0113\7,\2\2\u0111\u0112\7\22\2\2\u0112\u0114\5\60\31\2\u0113\u0111\3"+
-		"\2\2\2\u0113\u0114\3\2\2\2\u0114/\3\2\2\2\u0115\u0116\b\31\1\2\u0116\u0117"+
-		"\7\f\2\2\u0117\u0120\5\60\31\f\u0118\u0119\7\21\2\2\u0119\u0120\5\60\31"+
-		"\13\u011a\u011b\7\23\2\2\u011b\u011c\5\60\31\2\u011c\u011d\7\24\2\2\u011d"+
-		"\u0120\3\2\2\2\u011e\u0120\5\62\32\2\u011f\u0115\3\2\2\2\u011f\u0118\3"+
-		"\2\2\2\u011f\u011a\3\2\2\2\u011f\u011e\3\2\2\2\u0120\u0138\3\2\2\2\u0121"+
-		"\u0122\f\r\2\2\u0122\u0123\7\20\2\2\u0123\u0137\5\60\31\r\u0124\u0125"+
-		"\f\n\2\2\u0125\u0126\t\2\2\2\u0126\u0137\5\60\31\13\u0127\u0128\f\t\2"+
-		"\2\u0128\u0129\t\3\2\2\u0129\u0137\5\60\31\n\u012a\u012b\f\b\2\2\u012b"+
-		"\u012c\t\4\2\2\u012c\u0137\5\60\31\t\u012d\u012e\f\7\2\2\u012e\u012f\t"+
-		"\5\2\2\u012f\u0137\5\60\31\b\u0130\u0131\f\6\2\2\u0131\u0132\7\4\2\2\u0132"+
-		"\u0137\5\60\31\7\u0133\u0134\f\5\2\2\u0134\u0135\7\3\2\2\u0135\u0137\5"+
-		"\60\31\6\u0136\u0121\3\2\2\2\u0136\u0124\3\2\2\2\u0136\u0127\3\2\2\2\u0136"+
-		"\u012a\3\2\2\2\u0136\u012d\3\2\2\2\u0136\u0130\3\2\2\2\u0136\u0133\3\2"+
-		"\2\2\u0137\u013a\3\2\2\2\u0138\u0136\3\2\2\2\u0138\u0139\3\2\2\2\u0139"+
-		"\61\3\2\2\2\u013a\u0138\3\2\2\2\u013b\u0145\t\6\2\2\u013c\u0145\t\7\2"+
-		"\2\u013d\u0145\7/\2\2\u013e\u0145\5$\23\2\u013f\u0145\5\64\33\2\u0140"+
-		"\u0145\5&\24\2\u0141\u0145\5(\25\2\u0142\u0145\5,\27\2\u0143\u0145\7\35"+
-		"\2\2\u0144\u013b\3\2\2\2\u0144\u013c\3\2\2\2\u0144\u013d\3\2\2\2\u0144"+
-		"\u013e\3\2\2\2\u0144\u013f\3\2\2\2\u0144\u0140\3\2\2\2\u0144\u0141\3\2"+
-		"\2\2\u0144\u0142\3\2\2\2\u0144\u0143\3\2\2\2\u0145\63\3\2\2\2\u0146\u014f"+
-		"\7\25\2\2\u0147\u014c\5\66\34\2\u0148\u0149\7\31\2\2\u0149\u014b\5\66"+
-		"\34\2\u014a\u0148\3\2\2\2\u014b\u014e\3\2\2\2\u014c\u014a\3\2\2\2\u014c"+
-		"\u014d\3\2\2\2\u014d\u0150\3\2\2\2\u014e\u014c\3\2\2\2\u014f\u0147\3\2"+
-		"\2\2\u014f\u0150\3\2\2\2\u0150\u0151\3\2\2\2\u0151\u0152\7\26\2\2\u0152"+
-		"\65\3\2\2\2\u0153\u0154\7,\2\2\u0154\u0155\7\32\2\2\u0155\u0156\5\60\31"+
-		"\2\u0156\67\3\2\2\2\':ACJP[ajo\u008d\u0090\u0095\u0097\u00a3\u00aa\u00b4"+
-		"\u00bb\u00bd\u00c4\u00cc\u00cf\u00d8\u00dd\u00ea\u00f1\u00fa\u00fd\u0100"+
-		"\u0107\u010e\u0113\u011f\u0136\u0138\u0144\u014c\u014f";
+		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\3\2\3\2\5"+
+		"\2A\n\2\3\3\3\3\3\3\3\4\3\4\7\4H\n\4\f\4\16\4K\13\4\3\4\3\4\3\5\3\5\5"+
+		"\5Q\n\5\3\6\3\6\3\6\3\6\5\6W\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5"+
+		"\7b\n\7\3\b\3\b\3\b\3\b\5\bh\n\b\3\t\3\t\7\tl\n\t\f\t\16\to\13\t\3\t\5"+
+		"\tr\n\t\3\n\3\n\3\n\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\16"+
+		"\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20"+
+		"\3\20\3\21\3\21\3\21\3\21\3\21\3\21\7\21\u0098\n\21\f\21\16\21\u009b\13"+
+		"\21\5\21\u009d\n\21\3\21\3\21\3\21\7\21\u00a2\n\21\f\21\16\21\u00a5\13"+
+		"\21\3\21\5\21\u00a8\n\21\3\21\3\21\3\22\3\22\3\22\3\22\7\22\u00b0\n\22"+
+		"\f\22\16\22\u00b3\13\22\3\22\3\22\3\22\3\22\5\22\u00b9\n\22\3\23\3\23"+
+		"\3\23\3\23\3\23\3\23\3\24\3\24\5\24\u00c3\n\24\3\24\3\24\3\25\3\25\3\25"+
+		"\7\25\u00ca\n\25\f\25\16\25\u00cd\13\25\3\25\3\25\3\25\3\25\5\25\u00d3"+
+		"\n\25\3\26\3\26\3\26\3\26\7\26\u00d9\n\26\f\26\16\26\u00dc\13\26\5\26"+
+		"\u00de\n\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u00e7\n\26\3\26\3"+
+		"\26\3\26\5\26\u00ec\n\26\3\27\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3\30"+
+		"\3\31\3\31\5\31\u00f9\n\31\3\32\3\32\3\32\7\32\u00fe\n\32\f\32\16\32\u0101"+
+		"\13\32\3\32\3\32\3\32\3\32\7\32\u0107\n\32\f\32\16\32\u010a\13\32\5\32"+
+		"\u010c\n\32\3\32\5\32\u010f\n\32\3\32\3\32\3\32\7\32\u0114\n\32\f\32\16"+
+		"\32\u0117\13\32\3\32\3\32\3\32\3\32\5\32\u011d\n\32\3\33\3\33\3\33\5\33"+
+		"\u0122\n\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\5\34\u012e"+
+		"\n\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34"+
+		"\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\7\34\u0145\n\34\f\34\16\34\u0148"+
+		"\13\34\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\5\35\u0153\n\35\3"+
+		"\36\3\36\3\36\3\36\7\36\u0159\n\36\f\36\16\36\u015c\13\36\5\36\u015e\n"+
+		"\36\3\36\3\36\3\37\3\37\3\37\3\37\3\37\2\3\66 \2\4\6\b\n\f\16\20\22\24"+
+		"\26\30\32\34\36 \"$&(*,.\60\62\64\668:<\2\b\3\2\r\17\3\2\13\f\3\2\7\n"+
+		"\3\2\5\6\3\2-.\3\2\33\34\2\u0182\2@\3\2\2\2\4B\3\2\2\2\6I\3\2\2\2\bP\3"+
+		"\2\2\2\nV\3\2\2\2\fa\3\2\2\2\16c\3\2\2\2\20i\3\2\2\2\22s\3\2\2\2\24v\3"+
+		"\2\2\2\26y\3\2\2\2\30}\3\2\2\2\32\u0081\3\2\2\2\34\u0087\3\2\2\2\36\u008c"+
+		"\3\2\2\2 \u0091\3\2\2\2\"\u00b8\3\2\2\2$\u00ba\3\2\2\2&\u00c0\3\2\2\2"+
+		"(\u00d2\3\2\2\2*\u00eb\3\2\2\2,\u00ed\3\2\2\2.\u00f2\3\2\2\2\60\u00f8"+
+		"\3\2\2\2\62\u011c\3\2\2\2\64\u011e\3\2\2\2\66\u012d\3\2\2\28\u0152\3\2"+
+		"\2\2:\u0154\3\2\2\2<\u0161\3\2\2\2>A\5\4\3\2?A\5\6\4\2@>\3\2\2\2@?\3\2"+
+		"\2\2A\3\3\2\2\2BC\5\b\5\2CD\7\62\2\2D\5\3\2\2\2EH\5\b\5\2FH\7\62\2\2G"+
+		"E\3\2\2\2GF\3\2\2\2HK\3\2\2\2IG\3\2\2\2IJ\3\2\2\2JL\3\2\2\2KI\3\2\2\2"+
+		"LM\7\2\2\3M\7\3\2\2\2NQ\5\f\7\2OQ\5\n\6\2PN\3\2\2\2PO\3\2\2\2Q\t\3\2\2"+
+		"\2RW\5\20\t\2SW\5\30\r\2TW\5\32\16\2UW\5 \21\2VR\3\2\2\2VS\3\2\2\2VT\3"+
+		"\2\2\2VU\3\2\2\2W\13\3\2\2\2Xb\5\16\b\2Yb\5\34\17\2Zb\5\36\20\2[b\5\""+
+		"\22\2\\]\58\35\2]^\7\62\2\2^b\3\2\2\2_b\5\66\34\2`b\7\63\2\2aX\3\2\2\2"+
+		"aY\3\2\2\2aZ\3\2\2\2a[\3\2\2\2a\\\3\2\2\2a_\3\2\2\2a`\3\2\2\2b\r\3\2\2"+
+		"\2cd\5\62\32\2dg\7\22\2\2eh\5\16\b\2fh\5\66\34\2ge\3\2\2\2gf\3\2\2\2h"+
+		"\17\3\2\2\2im\5\22\n\2jl\5\26\f\2kj\3\2\2\2lo\3\2\2\2mk\3\2\2\2mn\3\2"+
+		"\2\2nq\3\2\2\2om\3\2\2\2pr\5\24\13\2qp\3\2\2\2qr\3\2\2\2r\21\3\2\2\2s"+
+		"t\7\36\2\2tu\5&\24\2u\23\3\2\2\2vw\7\37\2\2wx\5(\25\2x\25\3\2\2\2yz\7"+
+		"\37\2\2z{\7\36\2\2{|\5&\24\2|\27\3\2\2\2}~\7 \2\2~\177\5\66\34\2\177\u0080"+
+		"\5(\25\2\u0080\31\3\2\2\2\u0081\u0082\7#\2\2\u0082\u0083\7,\2\2\u0083"+
+		"\u0084\7$\2\2\u0084\u0085\5\66\34\2\u0085\u0086\5(\25\2\u0086\33\3\2\2"+
+		"\2\u0087\u0088\7!\2\2\u0088\u0089\7\23\2\2\u0089\u008a\5\66\34\2\u008a"+
+		"\u008b\7\24\2\2\u008b\35\3\2\2\2\u008c\u008d\7\"\2\2\u008d\u008e\7\23"+
+		"\2\2\u008e\u008f\5\66\34\2\u008f\u0090\7\24\2\2\u0090\37\3\2\2\2\u0091"+
+		"\u0092\7%\2\2\u0092\u0093\7,\2\2\u0093\u009c\7\23\2\2\u0094\u0099\5\64"+
+		"\33\2\u0095\u0096\7\31\2\2\u0096\u0098\5\64\33\2\u0097\u0095\3\2\2\2\u0098"+
+		"\u009b\3\2\2\2\u0099\u0097\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009d\3\2"+
+		"\2\2\u009b\u0099\3\2\2\2\u009c\u0094\3\2\2\2\u009c\u009d\3\2\2\2\u009d"+
+		"\u009e\3\2\2\2\u009e\u00a3\7\24\2\2\u009f\u00a2\7\62\2\2\u00a0\u00a2\5"+
+		"\b\5\2\u00a1\u009f\3\2\2\2\u00a1\u00a0\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3"+
+		"\u00a1\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4\u00a7\3\2\2\2\u00a5\u00a3\3\2"+
+		"\2\2\u00a6\u00a8\5$\23\2\u00a7\u00a6\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8"+
+		"\u00a9\3\2\2\2\u00a9\u00aa\7&\2\2\u00aa!\3\2\2\2\u00ab\u00ac\7(\2\2\u00ac"+
+		"\u00b1\7,\2\2\u00ad\u00ae\7+\2\2\u00ae\u00b0\7,\2\2\u00af\u00ad\3\2\2"+
+		"\2\u00b0\u00b3\3\2\2\2\u00b1\u00af\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b9"+
+		"\3\2\2\2\u00b3\u00b1\3\2\2\2\u00b4\u00b5\7)\2\2\u00b5\u00b6\7,\2\2\u00b6"+
+		"\u00b7\7(\2\2\u00b7\u00b9\7,\2\2\u00b8\u00ab\3\2\2\2\u00b8\u00b4\3\2\2"+
+		"\2\u00b9#\3\2\2\2\u00ba\u00bb\7\'\2\2\u00bb\u00bc\7\23\2\2\u00bc\u00bd"+
+		"\5\66\34\2\u00bd\u00be\7\24\2\2\u00be\u00bf\7\62\2\2\u00bf%\3\2\2\2\u00c0"+
+		"\u00c2\5\66\34\2\u00c1\u00c3\7\62\2\2\u00c2\u00c1\3\2\2\2\u00c2\u00c3"+
+		"\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\u00c5\5(\25\2\u00c5\'\3\2\2\2\u00c6"+
+		"\u00cb\7\25\2\2\u00c7\u00ca\5\b\5\2\u00c8\u00ca\7\62\2\2\u00c9\u00c7\3"+
+		"\2\2\2\u00c9\u00c8\3\2\2\2\u00ca\u00cd\3\2\2\2\u00cb\u00c9\3\2\2\2\u00cb"+
+		"\u00cc\3\2\2\2\u00cc\u00ce\3\2\2\2\u00cd\u00cb\3\2\2\2\u00ce\u00d3\7\26"+
+		"\2\2\u00cf\u00d0\5\b\5\2\u00d0\u00d1\7\62\2\2\u00d1\u00d3\3\2\2\2\u00d2"+
+		"\u00c6\3\2\2\2\u00d2\u00cf\3\2\2\2\u00d3)\3\2\2\2\u00d4\u00dd\7\27\2\2"+
+		"\u00d5\u00da\5\66\34\2\u00d6\u00d7\7\31\2\2\u00d7\u00d9\5\66\34\2\u00d8"+
+		"\u00d6\3\2\2\2\u00d9\u00dc\3\2\2\2\u00da\u00d8\3\2\2\2\u00da\u00db\3\2"+
+		"\2\2\u00db\u00de\3\2\2\2\u00dc\u00da\3\2\2\2\u00dd\u00d5\3\2\2\2\u00dd"+
+		"\u00de\3\2\2\2\u00de\u00df\3\2\2\2\u00df\u00ec\7\30\2\2\u00e0\u00e1\7"+
+		"\27\2\2\u00e1\u00e2\5\66\34\2\u00e2\u00e6\7\32\2\2\u00e3\u00e4\5\66\34"+
+		"\2\u00e4\u00e5\7\32\2\2\u00e5\u00e7\3\2\2\2\u00e6\u00e3\3\2\2\2\u00e6"+
+		"\u00e7\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8\u00e9\5\66\34\2\u00e9\u00ea\7"+
+		"\30\2\2\u00ea\u00ec\3\2\2\2\u00eb\u00d4\3\2\2\2\u00eb\u00e0\3\2\2\2\u00ec"+
+		"+\3\2\2\2\u00ed\u00ee\5\62\32\2\u00ee\u00ef\7\27\2\2\u00ef\u00f0\5\66"+
+		"\34\2\u00f0\u00f1\7\30\2\2\u00f1-\3\2\2\2\u00f2\u00f3\5\62\32\2\u00f3"+
+		"\u00f4\7+\2\2\u00f4\u00f5\5\60\31\2\u00f5/\3\2\2\2\u00f6\u00f9\5\62\32"+
+		"\2\u00f7\u00f9\5,\27\2\u00f8\u00f6\3\2\2\2\u00f8\u00f7\3\2\2\2\u00f9\61"+
+		"\3\2\2\2\u00fa\u00ff\7,\2\2\u00fb\u00fc\7+\2\2\u00fc\u00fe\7,\2\2\u00fd"+
+		"\u00fb\3\2\2\2\u00fe\u0101\3\2\2\2\u00ff\u00fd\3\2\2\2\u00ff\u0100\3\2"+
+		"\2\2\u0100\u010e\3\2\2\2\u0101\u00ff\3\2\2\2\u0102\u010b\7\23\2\2\u0103"+
+		"\u0108\5\66\34\2\u0104\u0105\7\31\2\2\u0105\u0107\5\66\34\2\u0106\u0104"+
+		"\3\2\2\2\u0107\u010a\3\2\2\2\u0108\u0106\3\2\2\2\u0108\u0109\3\2\2\2\u0109"+
+		"\u010c\3\2\2\2\u010a\u0108\3\2\2\2\u010b\u0103\3\2\2\2\u010b\u010c\3\2"+
+		"\2\2\u010c\u010d\3\2\2\2\u010d\u010f\7\24\2\2\u010e\u0102\3\2\2\2\u010e"+
+		"\u010f\3\2\2\2\u010f\u011d\3\2\2\2\u0110\u0115\7,\2\2\u0111\u0112\7+\2"+
+		"\2\u0112\u0114\7,\2\2\u0113\u0111\3\2\2\2\u0114\u0117\3\2\2\2\u0115\u0113"+
+		"\3\2\2\2\u0115\u0116\3\2\2\2\u0116\u0118\3\2\2\2\u0117\u0115\3\2\2\2\u0118"+
+		"\u0119\7\27\2\2\u0119\u011a\5\66\34\2\u011a\u011b\7\30\2\2\u011b\u011d"+
+		"\3\2\2\2\u011c\u00fa\3\2\2\2\u011c\u0110\3\2\2\2\u011d\63\3\2\2\2\u011e"+
+		"\u0121\7,\2\2\u011f\u0120\7\22\2\2\u0120\u0122\5\66\34\2\u0121\u011f\3"+
+		"\2\2\2\u0121\u0122\3\2\2\2\u0122\65\3\2\2\2\u0123\u0124\b\34\1\2\u0124"+
+		"\u0125\7\f\2\2\u0125\u012e\5\66\34\f\u0126\u0127\7\21\2\2\u0127\u012e"+
+		"\5\66\34\13\u0128\u0129\7\23\2\2\u0129\u012a\5\66\34\2\u012a\u012b\7\24"+
+		"\2\2\u012b\u012e\3\2\2\2\u012c\u012e\58\35\2\u012d\u0123\3\2\2\2\u012d"+
+		"\u0126\3\2\2\2\u012d\u0128\3\2\2\2\u012d\u012c\3\2\2\2\u012e\u0146\3\2"+
+		"\2\2\u012f\u0130\f\r\2\2\u0130\u0131\7\20\2\2\u0131\u0145\5\66\34\r\u0132"+
+		"\u0133\f\n\2\2\u0133\u0134\t\2\2\2\u0134\u0145\5\66\34\13\u0135\u0136"+
+		"\f\t\2\2\u0136\u0137\t\3\2\2\u0137\u0145\5\66\34\n\u0138\u0139\f\b\2\2"+
+		"\u0139\u013a\t\4\2\2\u013a\u0145\5\66\34\t\u013b\u013c\f\7\2\2\u013c\u013d"+
+		"\t\5\2\2\u013d\u0145\5\66\34\b\u013e\u013f\f\6\2\2\u013f\u0140\7\4\2\2"+
+		"\u0140\u0145\5\66\34\7\u0141\u0142\f\5\2\2\u0142\u0143\7\3\2\2\u0143\u0145"+
+		"\5\66\34\6\u0144\u012f\3\2\2\2\u0144\u0132\3\2\2\2\u0144\u0135\3\2\2\2"+
+		"\u0144\u0138\3\2\2\2\u0144\u013b\3\2\2\2\u0144\u013e\3\2\2\2\u0144\u0141"+
+		"\3\2\2\2\u0145\u0148\3\2\2\2\u0146\u0144\3\2\2\2\u0146\u0147\3\2\2\2\u0147"+
+		"\67\3\2\2\2\u0148\u0146\3\2\2\2\u0149\u0153\t\6\2\2\u014a\u0153\t\7\2"+
+		"\2\u014b\u0153\7/\2\2\u014c\u0153\5*\26\2\u014d\u0153\5:\36\2\u014e\u0153"+
+		"\5,\27\2\u014f\u0153\5.\30\2\u0150\u0153\5\62\32\2\u0151\u0153\7\35\2"+
+		"\2\u0152\u0149\3\2\2\2\u0152\u014a\3\2\2\2\u0152\u014b\3\2\2\2\u0152\u014c"+
+		"\3\2\2\2\u0152\u014d\3\2\2\2\u0152\u014e\3\2\2\2\u0152\u014f\3\2\2\2\u0152"+
+		"\u0150\3\2\2\2\u0152\u0151\3\2\2\2\u01539\3\2\2\2\u0154\u015d\7\25\2\2"+
+		"\u0155\u015a\5<\37\2\u0156\u0157\7\31\2\2\u0157\u0159\5<\37\2\u0158\u0156"+
+		"\3\2\2\2\u0159\u015c\3\2\2\2\u015a\u0158\3\2\2\2\u015a\u015b\3\2\2\2\u015b"+
+		"\u015e\3\2\2\2\u015c\u015a\3\2\2\2\u015d\u0155\3\2\2\2\u015d\u015e\3\2"+
+		"\2\2\u015e\u015f\3\2\2\2\u015f\u0160\7\26\2\2\u0160;\3\2\2\2\u0161\u0162"+
+		"\7,\2\2\u0162\u0163\7\32\2\2\u0163\u0164\5\66\34\2\u0164=\3\2\2\2(@GI"+
+		"PVagmq\u0099\u009c\u00a1\u00a3\u00a7\u00b1\u00b8\u00c2\u00c9\u00cb\u00d2"+
+		"\u00da\u00dd\u00e6\u00eb\u00f8\u00ff\u0108\u010b\u010e\u0115\u011c\u0121"+
+		"\u012d\u0144\u0146\u0152\u015a\u015d";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

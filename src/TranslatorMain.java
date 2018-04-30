@@ -9,6 +9,5 @@ public class TranslatorMain {
         ParseTree tree = parser.parse();
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(new Listener(), tree);
-        System.out.println();
     }
 }

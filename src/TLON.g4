@@ -39,9 +39,21 @@ assignment
  ;
 
 if_stat
- : IF condition_block (ELSE IF condition_block)* (ELSE stat_block)?
+ : if_condition_block (else_if_sy)* (else_sy)?
  ;
 
+if_condition_block
+ : IF condition_block
+ ;
+ 
+else_sy
+ : ELSE  stat_block
+ ; 
+ 
+else_if_sy
+ : ELSE IF condition_block
+ ;
+ 
 while_stat
  : WHILE expr stat_block
  ;
@@ -59,7 +71,7 @@ leer
  ;
 
 funcion
- : FUNCION ID OPAR (parametro (COMMA parametro)*)? CPAR (NEWLINE|stat)* retornar END
+ : FUNCION ID OPAR (parametro (COMMA parametro)*)? CPAR (NEWLINE|stat)* (retornar)? END
  ;
 
 importar
@@ -178,7 +190,7 @@ LEER : 'leer';
 FOR : 'for';
 IN : 'in';
 FUNCION: 'funcion';
-END: 'end';
+END: 'end funcion';
 RETORNO: 'retorno';
 IMPORT: 'importar';
 FROM: 'desde';

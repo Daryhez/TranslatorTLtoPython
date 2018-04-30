@@ -55,7 +55,7 @@ public class Listener implements TLONListener{
     @Override
     public void enterAssignment(TLONParser.AssignmentContext ctx) {
         for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println(ctx.variable().getText() + " " + ctx.ASSIGN() + " " + ctx.expr().getText());
+        System.out.println(ctx.variable().getText() + " " + ctx.ASSIGN().getText() + " " + ctx.expr().getText());
     }
     @Override
     public void exitAssignment(TLONParser.AssignmentContext ctx) {
@@ -63,13 +63,40 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterIf_stat(TLONParser.If_statContext ctx) {
-        //TODO Arregalr else if y else
-        for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println("if " + ctx.condition_block(0).expr().getText() + ":");
-        tabs++;
+
     }
     @Override
     public void exitIf_stat(TLONParser.If_statContext ctx) {
+
+    }
+    @Override
+    public void enterIf_condition_block(TLONParser.If_condition_blockContext ctx) {
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
+        System.out.println("if " + ctx.condition_block().expr().getText() + " :");
+        tabs++;
+    }
+    @Override
+    public void exitIf_condition_block(TLONParser.If_condition_blockContext ctx) {
+        tabs--;
+    }
+    @Override
+    public void enterElse_sy(TLONParser.Else_syContext ctx) {
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
+        System.out.println("else:");
+        tabs++;
+    }
+    @Override
+    public void exitElse_sy(TLONParser.Else_syContext ctx) {
+        tabs--;
+    }
+    @Override
+    public void enterElse_if_sy(TLONParser.Else_if_syContext ctx) {
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
+        System.out.println("elif " + ctx.condition_block().expr().getText() + " :");
+        tabs++;
+    }
+    @Override
+    public void exitElse_if_sy(TLONParser.Else_if_syContext ctx) {
         tabs--;
     }
     @Override
@@ -117,9 +144,10 @@ public class Listener implements TLONListener{
             sb.append(ctx.parametro(i).getText());
             sb.append(", ");
         }
-        String s = sb.substring(0, sb.length() - 2);
+        String s = sb.length()  == 0 ? "" : sb.substring(0, sb.length() - 2);
         for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println("def " + ctx.ID().getText() + " " + ctx.OPAR().getText() + " " + s + " " + ctx.CPAR() + ":");
+        s = !s.equals("") ? " " + s + " " : s;
+        System.out.println("def " + ctx.ID().getText() + " " + ctx.OPAR().getText() + s + ctx.CPAR() + ":");
         tabs++;
     }
     @Override
