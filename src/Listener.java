@@ -63,6 +63,7 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterIf_stat(TLONParser.If_statContext ctx) {
+        //TODO Arregalr else if y else
         for (int i = 0; i < tabs; i++) System.out.print("\t");
         System.out.println("if " + ctx.condition_block(0).expr().getText() + ":");
         tabs++;
@@ -84,9 +85,9 @@ public class Listener implements TLONListener{
     @Override
     public void enterFor_stat(TLONParser.For_statContext ctx) {
         for (int i = 0; i < tabs; i++) System.out.print("\t");
-
+        System.out.println("for " + ctx.ID().getText() + " " +ctx.IN().getText() + " " + ctx.expr().getText() + ":");
+        tabs++;
     }
-
     @Override
     public void exitFor_stat(TLONParser.For_statContext ctx) {
         tabs--;
@@ -100,20 +101,25 @@ public class Listener implements TLONListener{
     public void exitLog(TLONParser.LogContext ctx) {
 
     }
-
     @Override
     public void enterLeer(TLONParser.LeerContext ctx) {
-
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
+        System.out.println(ctx.expr().getText() + " = input()");
     }
-
     @Override
     public void exitLeer(TLONParser.LeerContext ctx) {
 
     }
-
     @Override
     public void enterFuncion(TLONParser.FuncionContext ctx) {
-
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; ctx.parametro(i) != null; i++){
+            sb.append(ctx.parametro(i));
+            sb.append(", ");
+        }
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
+        System.out.println("def " + ctx.ID().getText() + " " + ctx.OPAR().getText() + " " + sb.toString() + " " + ctx.CPAR() + ":");
+        tabs++;
     }
 
     @Override
