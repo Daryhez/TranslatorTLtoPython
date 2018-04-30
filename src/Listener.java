@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class Listener implements TLONListener{
     private static int tabs = 0;
+    private static boolean asg = false;
     @Override
     public void enterParse(TLONParser.ParseContext ctx) {
 
@@ -54,12 +55,13 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterAssignment(TLONParser.AssignmentContext ctx) {
+        asg = true;
         for (int i = 0; i < tabs; i++) System.out.print("\t");
         System.out.println(ctx.variable().getText() + " " + ctx.ASSIGN().getText() + " " + ctx.expr().getText());
     }
     @Override
     public void exitAssignment(TLONParser.AssignmentContext ctx) {
-
+        asg = false;
     }
     @Override
     public void enterIf_stat(TLONParser.If_statContext ctx) {
@@ -156,6 +158,7 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterImportar(TLONParser.ImportarContext ctx) {
+        for (int i = 0; i < tabs; i++) System.out.print("\t");
         System.out.println("import " + ctx.ID(0).getText());
     }
     @Override
@@ -164,12 +167,13 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterRetornar(TLONParser.RetornarContext ctx) {
+        asg = true;
         for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println("return " +  ctx.expr().getText());
+        System.out.println("return (" +  ctx.expr().getText() + ")");
     }
     @Override
     public void exitRetornar(TLONParser.RetornarContext ctx) {
-
+        asg = false;
     }
     @Override
     public void enterCondition_block(TLONParser.Condition_blockContext ctx) {
@@ -227,6 +231,19 @@ public class Listener implements TLONListener{
     public void exitVariable(TLONParser.VariableContext ctx) {
 
     }
+    @Override
+    public void enterCall_function(TLONParser.Call_functionContext ctx) {
+        if (ctx.CPAR() != null && !asg) {
+            for (int i = 0; i < tabs; i++) System.out.print("\t");
+            System.out.println(ctx.getText());
+        }
+    }
+
+    @Override
+    public void exitCall_function(TLONParser.Call_functionContext ctx) {
+
+    }
+
     @Override
     public void enterParametro(TLONParser.ParametroContext ctx) {
 

@@ -71,7 +71,7 @@ leer
  ;
 
 funcion
- : FUNCION ID OPAR (parametro (COMMA parametro)*)? CPAR (NEWLINE|stat)* (retornar)? END
+ : FUNCION ID OPAR (parametro (COMMA parametro)*)? CPAR (NEWLINE|stat|retornar)* END
  ;
 
 importar
@@ -88,8 +88,8 @@ condition_block
  ;
 
 stat_block
- : OBRACE (stat|NEWLINE)* CBRACE
- | stat NEWLINE
+ : OBRACE (stat|retornar|NEWLINE)* CBRACE
+ | (stat|retornar) NEWLINE
  ;
 
 array
@@ -111,10 +111,14 @@ accesstoobject
  ;
 
 variable
- : ID (POINT ID)* (OPAR (expr (COMMA expr)*)? CPAR)?
+ : call_function
  | ID (POINT ID)* OKEY expr CKEY
  ; 
 
+call_function
+ : ID (POINT ID)* (OPAR (expr (COMMA expr)*)? CPAR)?
+ ;
+ 
 parametro
  : ID (ASSIGN expr)?
  ;

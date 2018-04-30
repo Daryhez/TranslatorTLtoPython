@@ -315,6 +315,18 @@ public class TLONBaseListener implements TLONListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCall_function(TLONParser.Call_functionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCall_function(TLONParser.Call_functionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParametro(TLONParser.ParametroContext ctx) { }
 	/**
 	 * {@inheritDoc}

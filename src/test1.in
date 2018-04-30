@@ -1,0 +1,38 @@
+funcion main()
+i = fact(5)
+a()
+end funcion
+
+funcion fact(n)
+log(n)
+if (n == 0){
+retorno (1)
+}
+retorno (n*fact(n-1))
+end funcion
+
+funcion a()
+x = b()
+if (3 == 0 && x < 10){
+c()
+d()
+}else{
+e()
+}
+end funcion
+
+funcion b()
+c()
+retorno (1.0)
+end funcion
+
+funcion c()
+d()
+end funcion
+
+funcion d()
+end funcion
+
+funcion e()
+
+end funcion

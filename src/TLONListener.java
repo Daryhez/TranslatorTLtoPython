@@ -257,6 +257,16 @@ public interface TLONListener extends ParseTreeListener {
 	 */
 	void exitVariable(TLONParser.VariableContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TLONParser#call_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterCall_function(TLONParser.Call_functionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLONParser#call_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitCall_function(TLONParser.Call_functionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TLONParser#parametro}.
 	 * @param ctx the parse tree
 	 */
