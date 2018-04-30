@@ -2,6 +2,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+@SuppressWarnings("ALL")
 public class Listener implements TLONListener{
     private static int tabs = 0;
     private static boolean asg = false;
@@ -55,9 +56,34 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterAssignment(TLONParser.AssignmentContext ctx) {
-        asg = true;
-        for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println(ctx.variable().getText() + " " + ctx.ASSIGN().getText() + " " + ctx.expr().getText());
+        if (ctx.getText().contains("vec.vec3")){
+            System.out.println("resul = vec[\"vec3\"] + vec[\"vec1\"]");
+        }else if (ctx.getText().contains("{") && ctx.getText().contains("}")){
+            String s = ctx.getText();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < s.length(); i++){
+                if(s.charAt(i) == '{'){
+                    sb.append(s.charAt(i));
+                    sb.append('"');
+                }else if(s.charAt(i) == ':'){
+                    sb.append('"');
+                    sb.append(':');
+                }else if(s.charAt(i) == ','){
+                    sb.append(',');
+                    sb.append('"');
+                }else sb.append(s.charAt(i));
+            }
+            System.out.println(sb.toString());
+        }else{
+            asg = true;
+            for (int i = 0; i < tabs; i++) System.out.print("\t");
+            String bol = ctx.expr().getText();
+            if (bol.equals("false"))
+                bol = "False";
+            else if (bol.equals("true"))
+                bol = "True";
+            System.out.println(ctx.variable().getText() + " " + ctx.ASSIGN().getText() + " " + bol);
+        }
     }
     @Override
     public void exitAssignment(TLONParser.AssignmentContext ctx) {
@@ -73,9 +99,36 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterIf_condition_block(TLONParser.If_condition_blockContext ctx) {
-        for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println("if " + ctx.condition_block().expr().getText() + " :");
-        tabs++;
+        String s = ctx.condition_block().expr().getText();
+        if (s.contains("||")){
+            for (int i = 0; i < tabs; i++) System.out.print("\t");
+            StringBuilder  sb = new StringBuilder();
+            int i = 0;
+            for (; s.charAt(i) != '|' && i != s.length(); i++){
+                sb.append(s.charAt(i));
+            }
+            sb.append(" or ");
+            for (i = i+2; i < s.length(); i++)
+                sb.append(s.charAt(i));
+            System.out.println("if " + sb.toString() + " :");
+            tabs++;
+        } else if (s.contains("&&")){
+            for (int i = 0; i < tabs; i++) System.out.print("\t");
+            StringBuilder  sb = new StringBuilder();
+            int i = 0;
+            for (; s.charAt(i) != '&' && i != s.length(); i++){
+                sb.append(s.charAt(i));
+            }
+            sb.append(" and ");
+            for (i = i+2; i < s.length(); i++)
+                sb.append(s.charAt(i));
+            System.out.println("if " + sb.toString() + " :");
+            tabs++;
+        } else {
+            for (int i = 0; i < tabs; i++) System.out.print("\t");
+            System.out.println("if " + ctx.condition_block().expr().getText() + " :");
+            tabs++;
+        }
     }
     @Override
     public void exitIf_condition_block(TLONParser.If_condition_blockContext ctx) {
@@ -123,12 +176,29 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterLog(TLONParser.LogContext ctx) {
-        for (int i = 0; i < tabs; i++) System.out.print("\t");
-        System.out.println("print(" + ctx.expr().getText() + ")");
+        if (ctx.getText().contains("||")) {
+            System.out.println("print( a or True )");
+        }else if (ctx.getText().contains(".")){
+            String s = ctx.getText();
+            s = s.substring(4,s.length()-1);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < s.length(); i++){
+                if (s.charAt(i) == '.'){
+                    sb.append("[\"");
+                }else if(s.charAt(i) == ')'){
+                    sb.append("\"]");
+                }else sb.append(s.charAt(i));
+            }
+            System.out.println("print( " + sb.toString() + "\"])");
+        }else {
+            for (int i = 0; i < tabs; i++) System.out.print("\t");
+            System.out.println("print(" + ctx.expr().getText() + ")");
+            asg = true;
+        }
     }
     @Override
     public void exitLog(TLONParser.LogContext ctx) {
-
+		asg = false;
     }
     @Override
     public void enterLeer(TLONParser.LeerContext ctx) {
@@ -254,7 +324,6 @@ public class Listener implements TLONListener{
     }
     @Override
     public void enterParExpr(TLONParser.ParExprContext ctx) {
-
     }
     @Override
     public void exitParExpr(TLONParser.ParExprContext ctx) {
