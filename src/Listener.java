@@ -143,127 +143,102 @@ public class Listener implements TLONListener{
     public void exitRetornar(TLONParser.RetornarContext ctx) {
 
     }
-
     @Override
     public void enterCondition_block(TLONParser.Condition_blockContext ctx) {
 
     }
-
     @Override
     public void exitCondition_block(TLONParser.Condition_blockContext ctx) {
 
     }
-
     @Override
     public void enterStat_block(TLONParser.Stat_blockContext ctx) {
 
     }
-
     @Override
     public void exitStat_block(TLONParser.Stat_blockContext ctx) {
 
     }
-
     @Override
     public void enterArray(TLONParser.ArrayContext ctx) {
 
     }
-
     @Override
     public void exitArray(TLONParser.ArrayContext ctx) {
 
     }
-
     @Override
     public void enterAccessarray(TLONParser.AccessarrayContext ctx) {
 
     }
-
     @Override
     public void exitAccessarray(TLONParser.AccessarrayContext ctx) {
 
     }
-
     @Override
     public void enterAccesstoobject(TLONParser.AccesstoobjectContext ctx) {
 
     }
-
     @Override
     public void exitAccesstoobject(TLONParser.AccesstoobjectContext ctx) {
 
     }
-
     @Override
     public void enterVariableaccessarray(TLONParser.VariableaccessarrayContext ctx) {
 
     }
-
     @Override
     public void exitVariableaccessarray(TLONParser.VariableaccessarrayContext ctx) {
 
     }
-
     @Override
     public void enterVariable(TLONParser.VariableContext ctx) {
 
     }
-
     @Override
     public void exitVariable(TLONParser.VariableContext ctx) {
 
     }
-
     @Override
     public void enterParametro(TLONParser.ParametroContext ctx) {
 
     }
-
     @Override
     public void exitParametro(TLONParser.ParametroContext ctx) {
 
     }
-
     @Override
     public void enterParExpr(TLONParser.ParExprContext ctx) {
 
     }
-
     @Override
     public void exitParExpr(TLONParser.ParExprContext ctx) {
 
     }
-
     @Override
     public void enterNotExpr(TLONParser.NotExprContext ctx) {
 
     }
-
     @Override
     public void exitNotExpr(TLONParser.NotExprContext ctx) {
 
     }
-
     @Override
     public void enterUnaryMinusExpr(TLONParser.UnaryMinusExprContext ctx) {
 
     }
-
     @Override
     public void exitUnaryMinusExpr(TLONParser.UnaryMinusExprContext ctx) {
 
     }
-
     @Override
     public void enterMultiplicationExpr(TLONParser.MultiplicationExprContext ctx) {
 
     }
-
     @Override
     public void exitMultiplicationExpr(TLONParser.MultiplicationExprContext ctx) {
 
     }
-
     @Override
     public void enterAtomExpr(TLONParser.AtomExprContext ctx) {
 
@@ -272,192 +247,154 @@ public class Listener implements TLONListener{
     public void exitAtomExpr(TLONParser.AtomExprContext ctx) {
 
     }
-
     @Override
     public void enterOrExpr(TLONParser.OrExprContext ctx) {
 
     }
-
     @Override
     public void exitOrExpr(TLONParser.OrExprContext ctx) {
 
     }
-
     @Override
     public void enterAdditiveExpr(TLONParser.AdditiveExprContext ctx) {
 
     }
-
     @Override
     public void exitAdditiveExpr(TLONParser.AdditiveExprContext ctx) {
 
     }
-
     @Override
     public void enterPowExpr(TLONParser.PowExprContext ctx) {
 
     }
-
     @Override
     public void exitPowExpr(TLONParser.PowExprContext ctx) {
 
     }
-
     @Override
     public void enterRelationalExpr(TLONParser.RelationalExprContext ctx) {
 
     }
-
     @Override
     public void exitRelationalExpr(TLONParser.RelationalExprContext ctx) {
 
     }
-
     @Override
     public void enterEqualityExpr(TLONParser.EqualityExprContext ctx) {
 
     }
-
     @Override
     public void exitEqualityExpr(TLONParser.EqualityExprContext ctx) {
 
     }
-
     @Override
     public void enterAndExpr(TLONParser.AndExprContext ctx) {
 
     }
-
     @Override
     public void exitAndExpr(TLONParser.AndExprContext ctx) {
 
     }
-
     @Override
     public void enterNumberAtom(TLONParser.NumberAtomContext ctx) {
 
     }
-
     @Override
     public void exitNumberAtom(TLONParser.NumberAtomContext ctx) {
 
     }
-
     @Override
     public void enterBooleanAtom(TLONParser.BooleanAtomContext ctx) {
 
     }
-
     @Override
     public void exitBooleanAtom(TLONParser.BooleanAtomContext ctx) {
 
     }
-
     @Override
     public void enterStringAtom(TLONParser.StringAtomContext ctx) {
 
     }
-
     @Override
     public void exitStringAtom(TLONParser.StringAtomContext ctx) {
 
     }
-
     @Override
     public void enterArrayAtom(TLONParser.ArrayAtomContext ctx) {
 
     }
-
     @Override
     public void exitArrayAtom(TLONParser.ArrayAtomContext ctx) {
 
     }
-
     @Override
     public void enterObjetoAtom(TLONParser.ObjetoAtomContext ctx) {
 
     }
-
     @Override
     public void exitObjetoAtom(TLONParser.ObjetoAtomContext ctx) {
 
     }
-
     @Override
     public void enterAccessToarray(TLONParser.AccessToarrayContext ctx) {
 
     }
-
     @Override
     public void exitAccessToarray(TLONParser.AccessToarrayContext ctx) {
 
     }
-
     @Override
     public void enterAccessObject(TLONParser.AccessObjectContext ctx) {
 
     }
-
     @Override
     public void exitAccessObject(TLONParser.AccessObjectContext ctx) {
 
     }
-
     @Override
     public void enterAccessVariable(TLONParser.AccessVariableContext ctx) {
 
     }
-
     @Override
     public void exitAccessVariable(TLONParser.AccessVariableContext ctx) {
 
     }
-
     @Override
     public void enterNilAtom(TLONParser.NilAtomContext ctx) {
 
     }
-
     @Override
     public void exitNilAtom(TLONParser.NilAtomContext ctx) {
 
     }
-
     @Override
     public void enterObjeto(TLONParser.ObjetoContext ctx) {
 
     }
-
     @Override
     public void exitObjeto(TLONParser.ObjetoContext ctx) {
 
     }
-
     @Override
     public void enterKeyvalue(TLONParser.KeyvalueContext ctx) {
 
     }
-
     @Override
     public void exitKeyvalue(TLONParser.KeyvalueContext ctx) {
 
     }
-
     @Override
     public void visitTerminal(TerminalNode terminalNode) {
 
     }
-
     @Override
     public void visitErrorNode(ErrorNode errorNode) {
 
     }
-
     @Override
     public void enterEveryRule(ParserRuleContext parserRuleContext) {
 
     }
-
     @Override
     public void exitEveryRule(ParserRuleContext parserRuleContext) {
 
